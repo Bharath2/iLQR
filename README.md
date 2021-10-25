@@ -5,10 +5,7 @@
 - with [Numba](https://numba.pydata.org) acceleration - 20x faster than native python code.
 
 #### Dependencies
-- sympy
-- numpy
-- numba
-- matplotlib
+- sympy, numpy, numba, matplotlib
 
 ## Usage
 ```python
