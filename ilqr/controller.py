@@ -13,8 +13,8 @@ class iLQR:
         '''
         self.cost = cost
         self.dynamics = dynamics
-        self.params = {'alphas'  : 0.5**np.arange(8),
-                       'regu_init': 20,
+        self.params = {'alphas'  : 0.5**np.arange(8), #line search candidates
+                       'regu_init': 20,    #initial regularization factor
                        'max_regu' : 10000,
                        'min_regu' : 0.001}
 
@@ -24,6 +24,7 @@ class iLQR:
           x0: initial state
           us_init: initial guess for control input trajectory
           maxiter: maximum number of iterations
+          early_stop: stop early if improvement in cost is low.
 
         Returns:
           xs: optimal states
@@ -68,7 +69,7 @@ class MPC:
     def control(self, x0, maxiters = 50, early_stop = True):
         '''
         Returns optimal actions
-        Supposed to be called Sequentially with observed state  
+        Supposed to be called Sequentially with observed state
         '''
         if self.us_init is None:
             raise Exception('initial guess has not been set')
@@ -79,7 +80,7 @@ class MPC:
 
 @numba.njit
 def run_ilqr(f, f_prime, L, Lf, L_prime, Lf_prime, x0, u_init, max_iters, early_stop,
-             alphas, regu_init = 100, max_regu = 10000, min_regu = 0.001):
+             alphas, regu_init = 20, max_regu = 10000, min_regu = 0.001):
     '''
        iLQR main loop
     '''
