@@ -14,7 +14,8 @@ from ilqr.containers import Dynamics, Cost
 ```
 See [examples](./examples) folder for more insight on how to use this repo.
 ### Construting Dynamics
-You can either define dynamics numerically or symbolically and pass it to the 'Dynamics Container' class. Look at the containers.py file in source code for more insight into construting the dynamics and cost.
+- You can either define dynamics numerically or symbolically and pass it to the 'Dynamics Container' class.
+- Look at the containers.py file in source code for more insight into construting the dynamics and cost.
 
 Let's consider a simple problem i.e. pushing a box to goal position from start (double integrator system). The dynamics are defined as
 ```
@@ -79,7 +80,8 @@ dynamics = Dynamics(f, f_x, f_u)
 ```
 
 ### Construting Cost
-Similar to the dynamics, the partial derivates of the cost functions are computed by the 'Cost Container'. They can also be specified directly as shown above.
+- Similar to the dynamics, the partial derivates of the cost functions are computed by the 'Cost Container'.
+- They can also be specified directly as shown above.
 
 Let's construct a simple cost to penalise the box for staying away from goal (i.e S = 10m).
 #### Simple cost
