@@ -1,4 +1,4 @@
-## iLQR
+# iLQR
 
 - Iterative Linear Quadratic Regulator (iLQR) for non-linear trajectory optimization.
 - Supports inequality constraints on control inputs or state variables.
