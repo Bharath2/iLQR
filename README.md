@@ -158,7 +158,7 @@ us_init = np.random.randn(N, n_u)*0.01
 #run optimization
 xs, us, cost_trace = controller.fit(x0, us_init)
 ```
-Note: The first run is slower since numba has to compile the functions. You can customise some parameters of iLQR (Look at the code for more info)
+Note: The first run is slower since numba has to compile the functions. Some parameters of iLQR controller can customised as per your needs (Look at the code for more info)
 
 #### Let's look at the results
 Displacement and Force applied with out constraint on force.
