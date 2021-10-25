@@ -1,7 +1,7 @@
 ## iLQR
 
 - Iterative Linear Quadratic Regulator (iLQR) for non-linear trajectory optimization.
-- Supports inequality constraints on state variables or control inputs.
+- Supports inequality constraints on control inputs or state variables.
 - with [Numba](https://numba.pydata.org) acceleration - 20x faster than native python code.
 
 #### Dependencies
@@ -186,8 +186,8 @@ us = mpc.control(x_next)
 ```
 
 ## Future Work
-- Add AutoDiff capabilities
-- Add MuJoCo support via dm-control
+- Add AutoDiff capabilities via [aesara](https://github.com/aesara-devs/aesara)
+- Add MuJoCo support via [dm-control](https://github.com/deepmind/dm_control)
 
 ## References
 - [Synthesis and Stabilization of Complex Behaviors through Online Trajectory Optimization](https://homes.cs.washington.edu/~todorov/papers/TassaIROS12.pdf)

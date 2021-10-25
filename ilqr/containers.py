@@ -109,7 +109,7 @@ class Cost:
         Lf_x  = Lf_M.jacobian(x)
         Lf_xx = Lf_x.jacobian(x)
 
-        #Convert all sympy objects to numba functions
+        #Convert all sympy objects to numba JIT functions
         funs = [L, L_x, L_u, L_xx, L_ux, L_uu, Lf, Lf_x, Lf_xx]
         for i in range(9):
           args = [x, u] if i < 6 else [x]

@@ -11,24 +11,26 @@ n_u = 1
 #time step
 dt = 0.025
 
-#get symbolic variables
-state, action = GetSyms(n_x, n_u)
-u = action[0]
-sin, cos, omega = state
-
 #Construct pendulum dynamics
 m, g, l = 1, 10, 1
-theta = sp.atan2(sin, cos)
-#angular acceleration
-alpha = (u - m*g*l*sp.sin(theta + np.pi))/(m*l**2)
-theta_n = theta + omega*dt
-state_n = sp.Matrix([sp.sin(theta_n),
-                     sp.cos(theta_n),
+def f(x, u):
+    #current state
+    sin, cos, omega = x
+    theta = np.arctan2(sin, cos)
+    #angular acceleration
+    alpha = (u[0] - m*g*l*np.sin(theta + np.pi))/(m*l**2)
+    #next theta
+    theta_n = theta + omega*dt
+    #return next state
+    return np.array([np.sin(theta_n),
+                     np.cos(theta_n),
                      omega + alpha*dt])
-Pendulum = Dynamics.SymDiscrete(state_n, state, action)
+#call dynamics container
+Pendulum = Dynamics.Discrete(f)
 
 
 #Construct cost to swing up Pendulum
+x, u = GetSyms(n_x, n_u)
 #theta = 0 --> sin(theta) = 0, cos(theta) = 1
 x_goal = np.array([0, 1, 0])
 Q  = np.diag([0, 1, 0.1])
@@ -51,7 +53,7 @@ us_init = np.random.randn(200, n_u)*0.01
 xs, us, cost_trace = controller.fit(x0, us_init)
 
 
-#plot theta and action trajectory
+#Plot theta and action trajectory
 import matplotlib.pyplot as plt
 theta = np.arctan2(xs[:, 0], xs[:, 1])
 theta = np.where(theta < 0, 2*np.pi+theta, theta)
