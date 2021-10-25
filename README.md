@@ -156,10 +156,10 @@ xs, us, cost_trace = controller.fit(x0, us_init)
 ```
 Note: The first run is slower since numba has to compile the functions.
 
-Let's look at the results
-#### Displacement and Force applied with out constraint on force.
+#### Let's look at the results
+Displacement and Force applied with out constraint on force.
 ![image](./imgs/withoutconstraint.png)
-#### Displacement and Force applied with constraint on force.
+Displacement and Force applied with constraint on force.
 ![image](./imgs/withconstraint.png)
 
 You can see that the force does not cross the 2N limit.
