@@ -63,7 +63,7 @@ x, u = GetSyms(n_x, n_u)
 x_n  = x + sp.Matrix([x[1], u[0]/m])*dt
 dynamics = Dynamics.SymDiscrete(x_n, x, u)
 ```
-Note: You can also directly construct dynamics by hard coding the partial derivaties.
+Note: You can also directly construct dynamics by hard coding the partial derivaties and wrapping them with numba.jit decorator.
 ```python
 def f(x, u): ...
 def f_x(x, u): ...
@@ -79,6 +79,8 @@ dynamics = Dynamics(f, f_x, f_u)
 ```
 
 ### Construting Cost
+Similar to the dynamics, the partial derivates of the cost functions are computed by the 'Cost Container'. They can also be specified directly as shown above.
+
 Let's construct a simple cost to penalise the box for staying away from goal (i.e S = 10m).
 #### Simple cost
 ```python
@@ -159,6 +161,7 @@ Note: The first run is slower since numba has to compile the functions.
 #### Let's look at the results
 Displacement and Force applied with out constraint on force.
 ![image](./imgs/withoutconstraint.png)
+
 Displacement and Force applied with constraint on force.
 ![image](./imgs/withconstraint.png)
 
