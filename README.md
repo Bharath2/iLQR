@@ -1,7 +1,7 @@
 # iLQR
 
 - Iterative Linear Quadratic Regulator (iLQR) for non-linear trajectory optimization.
-- Supports inequality constraints on control inputs or state variables.
+- Supports inequality constraints on control inputs or state variables via Logarithmic barrier function.
 - with [Numba](https://numba.pydata.org) acceleration - 20x faster than native python code.
 
 #### Dependencies

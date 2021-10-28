@@ -123,7 +123,7 @@ def rollout(f, L, Lf, x0, us):
     '''
       Rollout with initial state and control trajectory
     '''
-    xs = np.zeros((us.shape[0] + 1, x0.shape[0]))
+    xs = np.empty((us.shape[0] + 1, x0.shape[0]))
     xs[0] = x0
     cost = 0
     for n in range(us.shape[0]):
@@ -138,7 +138,7 @@ def forward_pass(f, L, Lf, xs, us, ks, Ks, alpha):
     '''
        Forward Pass
     '''
-    xs_new = np.zeros(xs.shape)
+    xs_new = np.empty(xs.shape)
 
     cost_new = 0.0
     xs_new[0] = xs[0]
@@ -159,8 +159,8 @@ def backward_pass(f_prime, L_prime, Lf_prime, xs, us, regu):
     '''
        Backward Pass
     '''
-    ks = np.zeros(us.shape)
-    Ks = np.zeros((us.shape[0], us.shape[1], xs.shape[1]))
+    ks = np.empty(us.shape)
+    Ks = np.empty((us.shape[0], us.shape[1], xs.shape[1]))
 
     delta_V = 0
     V_x, V_xx = Lf_prime(xs[-1])
