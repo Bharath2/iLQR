@@ -17,19 +17,42 @@ def GetSyms(n_x, n_u):
   return xs, us
 
 
-def Constrain(u, max_u, min_u):
+def Constrain(cs, eps = 1e-4):
     '''
-    Logarithmic barrier function to constrain variables
+    Constraint via logarithmic barrier function
+    Limitation: Doesn't work with infeasible initial guess.
+    cs: list of constraints of form g(x, u) >= 0
+    eps : parameters
     '''
     cost = 0
-    for i in range(u.shape[0]):
-        #normalise u[i] to vary from -1 to 1
-        diff = (max_u[i] - min_u[i])/2
-        u_norm = (u[i] - min_u[i])/diff - 1
-        #constrain u_norm from -1 to 1
-        cost -= sp.log(1 - u_norm + 1e-4)
-        cost -= sp.log(1 + u_norm + 1e-4)
+    for i in range(len(cs)):
+        cost -= sp.log(cs[i] + eps)
     return 0.1*cost
+
+
+def Bounded(vars, vmax, vmin, *params):
+    '''
+    Logarithmic barrier function to constrain variables.
+    Limitation: Doesn't work with infeasible initial guess.
+    '''
+    cs = []
+    for i in range(len(vars)):
+        diff = (vmax[i] - vmin[i])/2
+        cs.append((vmax[i] - vars[i])/diff)
+        cs.append((vars[i] - vmin[i])/diff)
+    return Constrain(cs, *params)
+
+
+def SoftConstrain(cs, alpha = 0.01, beta = 10):
+    '''
+    Constraint via exponential barrier function
+    cs: list of constraints of form g(x, u) >= 0
+    alpha, beta : parameters
+    '''
+    cost = 0
+    for i in range(len(cs)):
+        cost += alpha*sp.exp(-beta*cs[i])
+    return cost
 
 
 def Smooth_abs(x, alpha = 0.25):
@@ -65,6 +88,8 @@ def sympy_to_numba(f, args, redu = True):
     '''
        Converts sympy matrix or expression to numba jitted function
     '''
+    modules = [{'atan2':np.arctan2}, 'numpy']
+
     if isinstance(f, sp.Matrix):
         #To convert all elements to floats
         m, n = f.shape
@@ -74,9 +99,9 @@ def sympy_to_numba(f, args, redu = True):
         if (n == 1 or m == 1) and redu:
             if n == 1: f = f.T
             f = sp.Array(f)[0, :]
-            f = njit(sp.lambdify(args, f, modules = [{'atan2':np.arctan2}, 'numpy']))
+            f = njit(sp.lambdify(args, f, modules = modules))
             f_new = lambda *args: np.array(f(*args))
             return njit(f_new)
 
-    f = sp.lambdify(args, f, modules = [{'atan2':np.arctan2}, 'numpy'])
+    f = sp.lambdify(args, f, modules = modules)
     return njit(f)

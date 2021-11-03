@@ -1,7 +1,7 @@
 # iLQR
 
 - Iterative Linear Quadratic Regulator (iLQR) for non-linear trajectory optimization.
-- Supports inequality constraints on control inputs or state variables via Logarithmic barrier function.
+- Supports inequality constraints on control inputs or state variables via barrier functions.
 - with [Numba](https://numba.pydata.org) acceleration - 20x faster than native python code.
 
 #### Dependencies
@@ -103,6 +103,7 @@ cost = Cost.Symbolic(L, Lf, x, u)
 ```
 Note: Currently only Symbolic costs are supported
 #### Constrain control input or state variable
+- [Logarithmic barrier function](https://en.wikipedia.org/wiki/Barrier_function) is implemented for adding inequality constraints as cost.
 - [Logarithmic barrier function](https://en.wikipedia.org/wiki/Barrier_function) is implemented for adding inequality constraints as cost.
 ```python
 from ilqr.utils import Constrain
