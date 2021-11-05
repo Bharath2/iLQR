@@ -13,6 +13,9 @@ from ilqr import iLQR
 from ilqr.containers import Dynamics, Cost
 ```
 See [examples](./examples) folder for more insight on how to use this repo.
+#### [vehicle control example](./examples/vehicle_control.py)
+![image](./imgs/overtake.gif)
+![image](./imgs/join.gif)
 ### Construting Dynamics
 - You can either define dynamics numerically or symbolically and pass it to the 'Dynamics Container' class.
 - Look at the containers.py file in source code for more insight into construting the dynamics and cost.
@@ -103,14 +106,14 @@ cost = Cost.Symbolic(L, Lf, x, u)
 ```
 Note: Currently only Symbolic costs are supported
 #### Constrain control input or state variable
-- [Logarithmic barrier function](https://en.wikipedia.org/wiki/Barrier_function) is implemented for adding inequality constraints as cost.
-- [Logarithmic barrier function](https://en.wikipedia.org/wiki/Barrier_function) is implemented for adding inequality constraints as cost.
+- [Logarithmic barrier function](https://en.wikipedia.org/wiki/Barrier_function) and Exponential barrier function are implemented for adding inequality constraints as cost.
+- They are available as
 ```python
-from ilqr.utils import Constrain
+from ilqr.utils import SoftConstrain, Bounded
 
 L = (s - 10)**2 + 0.1*v**2
 #Running cost with constraint on applied force (2N to -2N)
-L += Constrain(u, max_u = [2], min_u = [-2])
+L += Bounded(u, high = [2], low = [-2])
 #construct cost
 cost = Cost.Symbolic(L, Lf, x, u)
 ```
@@ -119,7 +122,7 @@ cost = Cost.Symbolic(L, Lf, x, u)
 ```python
 import numpy as np
 import sympy as sp
-from ilqr.utils import GetSyms, Constrain
+from ilqr.utils import GetSyms, Bounded
 from ilqr.containers import Cost
 
 x_goal = np.array([10, 0])
@@ -130,7 +133,7 @@ QT = np.diag([10, 10])
 cost = Cost.QR(Q, R, QT, x_goal)
 
 #Add constraints on Force (2N to -2N)
-cons = Constrain(u, max_u = [2], min_u = [-2])
+cons = Bounded(u, high = [2], low = [-2])
 #construct Quadratic cost with constraints
 cost = Cost.QR(Q, R, QT, x_goal, cons)
 ```

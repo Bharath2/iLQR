@@ -30,16 +30,16 @@ def Constrain(cs, eps = 1e-4):
     return 0.1*cost
 
 
-def Bounded(vars, vmax, vmin, *params):
+def Bounded(vars, high, low, *params):
     '''
     Logarithmic barrier function to constrain variables.
     Limitation: Doesn't work with infeasible initial guess.
     '''
     cs = []
     for i in range(len(vars)):
-        diff = (vmax[i] - vmin[i])/2
-        cs.append((vmax[i] - vars[i])/diff)
-        cs.append((vars[i] - vmin[i])/diff)
+        diff = (high[i] - low[i])/2
+        cs.append((high[i] - vars[i])/diff)
+        cs.append((vars[i] - lowz[i])/diff)
     return Constrain(cs, *params)
 
 

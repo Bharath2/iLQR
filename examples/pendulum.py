@@ -1,3 +1,6 @@
+'''
+ swing up pendulum with limited torque
+'''
 import sympy as sp
 import numpy as np
 

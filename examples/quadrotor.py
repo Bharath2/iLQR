@@ -1,3 +1,7 @@
+'''
+ Quadrotor dynamics
+'''
+
 import sympy as sp
 import numpy as np
 
@@ -39,7 +43,7 @@ def f(state, actions):
     omega = np.array([p, q, r])
     pqrdot = invI.dot( np.array([M1, M2, M3]) - np.cross(omega, I.dot(omega)) )
     state_dot = np.r_([[xdot, ydot, zdot],
-                      accel, qdot, pqrdot]
+                       accel, qdot, pqrdot]
     return state_dot
 
 
