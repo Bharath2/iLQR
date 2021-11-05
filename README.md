@@ -199,6 +199,7 @@ us = mpc.control(x_next)
 ## Future Work
 - Add AutoDiff capabilities via [aesara](https://github.com/aesara-devs/aesara)
 - Add MuJoCo support via [dm-control](https://github.com/deepmind/dm_control)
+- Support for cost to follow given trajectory
 
 ## References
 - [Synthesis and Stabilization of Complex Behaviors through Online Trajectory Optimization](https://homes.cs.washington.edu/~todorov/papers/TassaIROS12.pdf)
