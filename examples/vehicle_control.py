@@ -42,9 +42,9 @@ dynamics = Dynamics.SymContinuous(state_dot, state, actio)
 px1, py2, heading1, vel1, steer1 = state[:5]
 px2, py2, heading2, vel2, steer2 = state[5:]
 #cost for reference lane
-L += 0.5*(py1 - 1.5)**2
+L = 0.5*(py1 - 1.5)**2
 #cost on velocity
-L  = (vel1*sp.cos(heading1) - 2)**2 + (vel1 - 2)**2
+L += (vel1*sp.cos(heading1) - 2)**2 + (vel1 - 2)**2
 #penality on actions
 L += 0.1*action[1]**2 + 0.1*action[0]**2
 
@@ -53,7 +53,7 @@ L += SoftConstrain([((px1 - px2)/4.5)**2 + ((py1 - py2)/2)**2 - 1])
 #constrain steering angle and y-position
 L += Bounded([py1, steer1], high = [2.5, 0.523], low = [-2.5, -0.523])
 #construct
-cost = Cost.Symbolic(L, Lf, state, action)
+cost = Cost.Symbolic(L, 0, state, action)
 
 #initialise the controller
 controller = iLQR(dynamics, cost)

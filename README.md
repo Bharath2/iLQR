@@ -7,15 +7,17 @@
 #### Dependencies
 - sympy, numpy, numba, matplotlib
 
+#### [vehicle control example](./examples/vehicle_control.py)
+![image](./imgs/overtake.gif)
+![image](./imgs/join.gif)
+
 ## Usage
 ```python
 from ilqr import iLQR
 from ilqr.containers import Dynamics, Cost
 ```
 See [examples](./examples) folder for more insight on how to use this repo.
-#### [vehicle control example](./examples/vehicle_control.py)
-![image](./imgs/overtake.gif)
-![image](./imgs/join.gif)
+
 ### Construting Dynamics
 - You can either define dynamics numerically or symbolically and pass it to the 'Dynamics Container' class.
 - Look at the containers.py file in source code for more insight into construting the dynamics and cost.
