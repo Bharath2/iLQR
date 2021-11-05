@@ -20,7 +20,7 @@ See [examples](./examples) folder for more insight on how to use this repo.
 
 ### Construting Dynamics
 - You can either define dynamics numerically or symbolically and pass it to the 'Dynamics Container' class.
-- Look at the containers.py file in source code for more insight into construting the dynamics and cost.
+- Look at [containers.py](./ilqr/containers.py) file in source code for more insight into construting the dynamics and cost.
 
 Let's consider a simple problem i.e. pushing a box to goal position from start (double integrator system). The dynamics are defined as
 ```
@@ -108,10 +108,9 @@ cost = Cost.Symbolic(L, Lf, x, u)
 ```
 Note: Currently only Symbolic costs are supported
 #### Constrain control input or state variable
-- [Logarithmic barrier function](https://en.wikipedia.org/wiki/Barrier_function) and Exponential barrier function are implemented for adding inequality constraints as cost.
-- They are available as
+- [Logarithmic barrier function](https://en.wikipedia.org/wiki/Barrier_function) and Exponential barrier function are implemented for adding inequality constraints as cost. Look at [utils.py](./ilqr/utils.py) file for more info.
 ```python
-from ilqr.utils import SoftConstrain, Bounded
+from ilqr.utils import Bounded
 
 L = (s - 10)**2 + 0.1*v**2
 #Running cost with constraint on applied force (2N to -2N)
