@@ -109,6 +109,7 @@ cost = Cost.Symbolic(L, Lf, x, u)
 Note: Currently only Symbolic costs are supported
 #### Constrain control input or state variable
 - Logarithmic and Exponential barrier functions are implemented for adding inequality constraints as cost. Look at [utils.py](./ilqr/utils.py) file for more info.
+
 ```python
 from ilqr.utils import Bounded
 
