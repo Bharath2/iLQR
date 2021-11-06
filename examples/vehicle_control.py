@@ -35,14 +35,14 @@ state_dot[:5, :] = vehicle_kinematics(state[:5], action)
 # other vehicle kinematics (constant velocity and steering)
 state_dot[5:, :] = vehicle_kinematics(state[5:], [0, 0])
 #construct
-dynamics = Dynamics.SymContinuous(state_dot, state, actio)
+dynamics = Dynamics.SymContinuous(state_dot, state, action)
 
 
 #Construct cost to overtake
 px1, py2, heading1, vel1, steer1 = state[:5]
 px2, py2, heading2, vel2, steer2 = state[5:]
 #cost for reference lane
-L = 0.5*(py1 - 1.5)**2
+L = 0.2*(py1 - 1.5)**2
 #cost on velocity
 L += (vel1*sp.cos(heading1) - 2)**2 + (vel1 - 2)**2
 #penality on actions
