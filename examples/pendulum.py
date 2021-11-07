@@ -40,7 +40,7 @@ Q  = np.diag([0, 1, 0.1])
 R  = np.diag([0.1])
 QT = np.diag([0, 100, 100])
 #Add constraints on torque input (2Nm to -2Nm)
-cons = Constrain(u, max_u = [2], min_u = [-2])
+cons = Bounded(u, high = [2], low = [-2])
 SwingUpCost = Cost.QR(Q, R, QT, x_goal, cons)
 
 
