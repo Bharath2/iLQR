@@ -39,7 +39,7 @@ def Bounded(vars, high, low, *params):
     for i in range(len(vars)):
         diff = (high[i] - low[i])/2
         cs.append((high[i] - vars[i])/diff)
-        cs.append((vars[i] - lowz[i])/diff)
+        cs.append((vars[i] - low[i])/diff)
     return Constrain(cs, *params)
 
 
