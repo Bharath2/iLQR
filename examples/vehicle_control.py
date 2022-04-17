@@ -39,7 +39,7 @@ dynamics = Dynamics.SymContinuous(state_dot, state, action)
 
 
 #Construct cost to overtake
-px1, py2, heading1, vel1, steer1 = state[:5]
+px1, py1, heading1, vel1, steer1 = state[:5]
 px2, py2, heading2, vel2, steer2 = state[5:]
 #cost for reference lane
 L = 0.2*(py1 - 1.5)**2
