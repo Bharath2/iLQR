@@ -175,7 +175,7 @@ Displacement and Force applied with constraint on force.
 
 You can see that the force does not cross the 2N limit.
 
-### MPC
+### Model Predictive Control (MPC)
 ```python
 from ilqr.controller import MPC
 
@@ -197,8 +197,7 @@ us = mpc.control(x_next)
 ```
 
 ## Future Work
-- Add AutoDiff capabilities via [aesara](https://github.com/aesara-devs/aesara)
-- Add MuJoCo support via [dm-control](https://github.com/deepmind/dm_control)
+- Add support to work with a differentiable physics simulator like [Brax](https://github.com/google/brax) 
 - Support for cost to follow given trajectory
 
 ## References
