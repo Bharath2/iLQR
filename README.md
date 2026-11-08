@@ -4,16 +4,15 @@
 - Supports inequality constraints on control inputs or state variables via barrier functions.
 - with [Numba](https://numba.pydata.org) acceleration - 20x faster than native python code.
 
-#### Dependencies
-- sympy, numpy (2.x), numba, matplotlib
-- `pip install -r requirements.txt`
-- Tested with Python 3.11, numpy 2.4.6, numba 0.68.1, sympy 1.14.0, matplotlib 3.11.2
-
 Run the examples as modules from the repository root, e.g. `python -m examples.quadrotor`
 
 #### [vehicle control example](./examples/vehicle_control.py)
 ![image](./imgs/overtake.gif)
 ![image](./imgs/join.gif)
+
+#### Dependencies
+- sympy, numpy (2.x), numba, matplotlib
+- `pip install -r requirements.txt`
 
 ## Usage
 ```python
@@ -200,14 +199,6 @@ us = mpc.control(x0)
 us = mpc.control(x_next)
 ```
 
-## Future Work
-- Add support to work with a differentiable physics simulator like [Brax](https://github.com/google/brax) 
-- Support for cost to follow given trajectory
-
-## References
-- [Synthesis and Stabilization of Complex Behaviors through Online Trajectory Optimization](https://homes.cs.washington.edu/~todorov/papers/TassaIROS12.pdf)
-- [Trajectory Optimization - Russ Tedrake](http://http://underactuated.csail.mit.edu/trajopt.html)
-
 ## More examples
 #### [quadrotor example](./examples/quadrotor.py)
 Hover to hover with limits on each rotor's thrust (dynamics from [Quadrotor-Simulation](https://github.com/Bharath2/Quadrotor-Simulation)).
@@ -216,3 +207,11 @@ Hover to hover with limits on each rotor's thrust (dynamics from [Quadrotor-Simu
 #### [pendulum example](./examples/pendulum.py)
 Swing up and balance with limited torque.
 ![image](./imgs/pendulum.gif)
+
+## Future Work
+- Add support to work with a differentiable physics simulator like [Brax](https://github.com/google/brax) 
+- Support for cost to follow given trajectory
+
+## References
+- [Synthesis and Stabilization of Complex Behaviors through Online Trajectory Optimization](https://homes.cs.washington.edu/~todorov/papers/TassaIROS12.pdf)
+- [Trajectory Optimization - Russ Tedrake](http://http://underactuated.csail.mit.edu/trajopt.html)
