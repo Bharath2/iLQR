@@ -1,0 +1,4 @@
+numpy>=2.0
+numba>=0.60
+sympy>=1.12
+matplotlib>=3.6

@@ -68,17 +68,19 @@ def FiniteDiff(fun, x, u, i, eps):
      Finite difference approximation
   '''
 
-  args = (x, u)
+  # perturb copies so the caller's arrays are never modified
+  args = (x.copy(), u.copy())
   fun0 = fun(x, u)
 
-  m = x.size
+  m = fun0.size
   n = args[i].size
 
   Jac = np.zeros((m, n))
   for k in range(n):
-    args[i][k] += eps
+    orig = args[i][k]
+    args[i][k] = orig + eps
     Jac[:, k] = (fun(args[0], args[1]) - fun0)/eps
-    args[i][k] -= eps
+    args[i][k] = orig
 
   return Jac
 
