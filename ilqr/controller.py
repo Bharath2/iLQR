@@ -74,7 +74,8 @@ class MPC:
         if self.us_init is None:
             raise Exception('initial guess has not been set')
         xs, us, cost_trace = self.controller.fit(x0, self.us_init, maxiters, early_stop)
-        self.us_init[:-self.ch] = self.us_init[self.ch:]
+        # warm start the next call with the rest of the optimized actions
+        self.us_init[:-self.ch] = us[self.ch:]
         return us[:self.ch]
 
 
@@ -189,7 +190,9 @@ def backward_pass(f_prime, L_prime, Lf_prime, xs, us, regu):
 
         # V_terms
         V_x  = Q_x + K.T@Q_u + Q_ux.T@k + K.T@Q_uu@k
-        V_xx = Q_xx + 2*K.T@Q_ux + K.T@Q_uu@K
+        # K.T@Q_ux is not symmetric when regu > 0, so use both cross terms
+        V_xx = Q_xx + K.T@Q_ux + Q_ux.T@K + K.T@Q_uu@K
+        V_xx = 0.5*(V_xx + V_xx.T)
         #expected cost reduction
         delta_V += Q_u.T@k + 0.5*k.T@Q_uu@k
 

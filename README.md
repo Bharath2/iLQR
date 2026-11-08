@@ -5,7 +5,11 @@
 - with [Numba](https://numba.pydata.org) acceleration - 20x faster than native python code.
 
 #### Dependencies
-- sympy, numpy, numba, matplotlib
+- sympy, numpy (2.x), numba, matplotlib
+- `pip install -r requirements.txt`
+- Tested with Python 3.11, numpy 2.4.6, numba 0.68.1, sympy 1.14.0, matplotlib 3.11.2
+
+Run the examples as modules from the repository root, e.g. `python -m examples.quadrotor`
 
 #### [vehicle control example](./examples/vehicle_control.py)
 ![image](./imgs/overtake.gif)
@@ -203,3 +207,12 @@ us = mpc.control(x_next)
 ## References
 - [Synthesis and Stabilization of Complex Behaviors through Online Trajectory Optimization](https://homes.cs.washington.edu/~todorov/papers/TassaIROS12.pdf)
 - [Trajectory Optimization - Russ Tedrake](http://http://underactuated.csail.mit.edu/trajopt.html)
+
+## More examples
+#### [quadrotor example](./examples/quadrotor.py)
+Hover to hover with limits on each rotor's thrust (dynamics from [Quadrotor-Simulation](https://github.com/Bharath2/Quadrotor-Simulation)).
+![image](./imgs/quadrotor.gif)
+
+#### [pendulum example](./examples/pendulum.py)
+Swing up and balance with limited torque.
+![image](./imgs/pendulum.gif)
